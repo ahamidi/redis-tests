@@ -54,7 +54,7 @@ CSV.open("./redis_tests.csv", "wb") do |csv|
       end
 
       if i>0 && i%10000 == 0
-        mem_used = redis.info("memory")["user_memory"]
+        mem_used = redis.info("memory")["used_memory"]
         csv << [i, max_ints, strategy, mem_used]
         csv.flush
       end
@@ -78,7 +78,7 @@ CSV.open("./redis_tests.csv", "wb") do |csv|
         #redis.lset(user_id, interest, score)
       #end
     #end
-    #puts "Used Memory: " + redis.info("memory")["user_memory"]
+    #puts "Used Memory: " + redis.info("memory")["used_memory"]
 
 
     # User is key, scores stored in hash with interest as key
@@ -96,7 +96,7 @@ CSV.open("./redis_tests.csv", "wb") do |csv|
 
 
       if i>0 && i%10000 == 0
-        mem_used = redis.info("memory")["user_memory"]
+        mem_used = redis.info("memory")["used_memory"]
         csv << [i, max_ints, strategy, mem_used]
         csv.flush
       end
@@ -129,7 +129,7 @@ CSV.open("./redis_tests.csv", "wb") do |csv|
       redis.evalsha(sha, [user_id], [interestHash.to_s])
 
       if i>0 && i%10000 == 0
-        mem_used = redis.info("memory")["user_memory"]
+        mem_used = redis.info("memory")["used_memory"]
         csv << [i, max_ints, strategy, mem_used]
         csv.flush
       end
@@ -154,7 +154,7 @@ CSV.open("./redis_tests.csv", "wb") do |csv|
       redis.set(user_id, Zlib::Deflate.deflate(interestHash.to_s))
 
       if i>0 && i%10000 == 0
-        mem_used = redis.info("memory")["user_memory"]
+        mem_used = redis.info("memory")["used_memory"]
         csv << [i, max_ints, strategy, mem_used]
         csv.flush
       end
